@@ -20,7 +20,7 @@ public class TestHelloController {
     @GetMapping(value = "/hello")
     public Result<String> hello() {
         Result<String> result = new Result<String>();
-        result.setResult("Hello World!");
+        result.setResult("Hello World! two");
         result.setSuccess(true);
         return result;
     }

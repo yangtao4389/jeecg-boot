@@ -254,6 +254,7 @@ public class SysUserController {
         try {
             //通过传入信息查询新的用户信息
             SysUser user = sysUserService.getOne(new QueryWrapper<SysUser>(sysUser));
+//            SysUser user = sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, sysUser.getUsername()));
             if (user != null) {
                 result.setSuccess(false);
                 result.setMessage("用户账号已存在");
@@ -361,12 +362,7 @@ public class SysUserController {
         return result;
     }
 
-    /**
-     * 导出excel
-     *
-     * @param request
-     * @param response
-     */
+
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(SysUser sysUser,HttpServletRequest request) {
         // Step.1 组装查询条件
@@ -786,11 +782,11 @@ public class SysUserController {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @param 根据用户名或手机号查询用户信息
-	 * @return
-	 */
+//	/**
+//	 *
+//	 * @param 根据用户名或手机号查询用户信息
+//	 * @return
+//	 */
 	@GetMapping("/querySysUser")
 	public Result<Map<String, Object>> querySysUser(SysUser sysUser) {
 		String phone = sysUser.getPhone();

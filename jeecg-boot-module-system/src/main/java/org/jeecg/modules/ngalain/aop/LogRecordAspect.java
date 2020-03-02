@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;;
 
 
 // 暂时注释掉，提高系统性能
-//@Aspect   //定义一个切面
-//@Configuration
+@Aspect   //定义一个切面
+@Configuration
 public class LogRecordAspect {
 private static final Logger logger = LoggerFactory.getLogger(LogRecordAspect.class);
 
@@ -25,8 +25,32 @@ private static final Logger logger = LoggerFactory.getLogger(LogRecordAspect.cla
     public void excudeService() {
     }
 
+
     @Around("excudeService()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        HttpServletRequest request = sra.getRequest();
+
+        String url = request.getRequestURL().toString();
+        String method = request.getMethod();
+        String uri = request.getRequestURI();
+        String queryString = request.getQueryString();
+        logger.info("请求开始, 各个参数, url: {}, method: {}, uri: {}, params: {}", url, method, uri, queryString);
+
+        // result的值就是被拦截方法的返回值
+        Object result = pjp.proceed();
+
+        logger.info("请求结束，controller的返回值是 " + result);
+        return result;
+    }
+
+
+    @Pointcut("execution(public * org.jeecg.modules.*.*.*.*Controller.*(..))")
+    public void excudeService2() {
+    }
+    @Around("excudeService2()")
+    public Object doAround2(ProceedingJoinPoint pjp) throws Throwable {
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();

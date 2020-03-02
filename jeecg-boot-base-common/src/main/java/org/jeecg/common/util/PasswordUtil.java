@@ -177,4 +177,9 @@ public class PasswordUtil {
 	}
 
 
+	public static void main(String[] args) {
+		String a = encrypt("admin","superuser","RCGTeGiH");
+		System.out.println(a);
+	}
+
 }
