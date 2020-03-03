@@ -121,6 +121,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/test/jeecgDemo/html", "anon"); //模板页面
 		filterChainDefinitionMap.put("/test/jeecgDemo/redis/**", "anon"); //redis测试
 		filterChainDefinitionMap.put("/test/jeecgDemo/hello", "anon"); //todo 新增测试
+		filterChainDefinitionMap.put("/scdx/jeecgMonthlyGrowthAnalysis/list", "anon"); //todo 新增测试
 		//排除Online请求
 		filterChainDefinitionMap.put("/auto/cgform/**", "anon");
 		

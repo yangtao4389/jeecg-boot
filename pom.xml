@@ -17,7 +17,6 @@
 		<module>jeecg-boot-base-common</module>
 		<module>jeecg-boot-module-system</module>
 		<module>jeecg-boot-module-rhax</module>
-		<module>jeecg-boot-module-rhax</module>
 	</modules>
 	
 	<distributionManagement>

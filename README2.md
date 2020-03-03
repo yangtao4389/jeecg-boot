@@ -45,16 +45,24 @@ admin superuser
 rhadmin rhaxadmin 
 
 
+### 注意打包次序
+先将 jeecg-boot-parent  通过maven install
+然后再将主文件夹  jeecg-boot-module-system 通过maven package  
+
+### 对于api的扫描
+还没找到在哪里定义  但必须是要org.jeecg下面的才可以
+
+
+###  对于api文档接口的扫描
+org.jeecg.config.Swagger2Config
+这里只是指定了org.jeecg.modules下面的api文档接口
 
 
 
 
 ### 部署 
 * 使用docker  
-docker pull tomcat:9.0
-docker  run  -d -p 18080:8080 --name dev_tomcat --restart=always -v /home/code/dev/tomcat:/home/code/app  -v /home/logs/dev/tomcat:/home/logs/ tomcat:9.0
-* docker安装redis
-docker pull redis:latest
+自带docker文件。。。
 
 * 提示错误：
 FATAL: kernel too old
