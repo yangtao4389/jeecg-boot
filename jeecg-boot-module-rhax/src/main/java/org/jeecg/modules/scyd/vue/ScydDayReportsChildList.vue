@@ -4,6 +4,23 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
+          <a-col :md="12" :sm="16">
+            <a-form-item label="date">
+              <j-date placeholder="请选择开始日期" class="query-group-cust" v-model="queryParam.date_begin"></j-date>
+              <span class="query-group-split-cust"></span>
+              <j-date placeholder="请选择结束日期" class="query-group-cust" v-model="queryParam.date_end"></j-date>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="8" >
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+              <a @click="handleToggleSearch" style="margin-left: 8px">
+                {{ toggleSearchStatus ? '收起' : '展开' }}
+                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
+              </a>
+            </span>
+          </a-col>
 
         </a-row>
       </a-form>
@@ -13,7 +30,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('jeecg_monthly_growth_analysis')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('scyd_day_reports_child')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -42,7 +59,7 @@
         :pagination="ipagination"
         :loading="loading"
         :rowSelection="{fixed:true,selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
-        
+        :scroll="tableScroll"
         @change="handleTableChange">
 
         <template slot="htmlSlot" slot-scope="text">
@@ -84,24 +101,26 @@
       </a-table>
     </div>
 
-    <jeecgMonthlyGrowthAnalysis-modal ref="modalForm" @ok="modalFormOk"></jeecgMonthlyGrowthAnalysis-modal>
+    <scydDayReportsChild-modal ref="modalForm" @ok="modalFormOk"></scydDayReportsChild-modal>
   </a-card>
 </template>
 
 <script>
 
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import JeecgMonthlyGrowthAnalysisModal from './modules/JeecgMonthlyGrowthAnalysisModal'
+  import ScydDayReportsChildModal from './modules/ScydDayReportsChildModal'
+  import JDate from '@/components/jeecg/JDate.vue'
 
   export default {
-    name: "JeecgMonthlyGrowthAnalysisList",
+    name: "ScydDayReportsChildList",
     mixins:[JeecgListMixin],
     components: {
-      JeecgMonthlyGrowthAnalysisModal
+      JDate,
+      ScydDayReportsChildModal
     },
     data () {
       return {
-        description: 'jeecg_monthly_growth_analysis管理页面',
+        description: 'scyd_day_reports_child管理页面',
         // 表头
         columns: [
           {
@@ -115,41 +134,57 @@
             }
           },
           {
-            title:'year',
+            title:'date',
             align:"center",
-            dataIndex: 'year'
+            dataIndex: 'date',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
-            title:'月份',
+            title:'uv',
             align:"center",
-            dataIndex: 'month'
+            dataIndex: 'uv'
           },
           {
-            title:'佣金/主营收入',
+            title:'pv',
             align:"center",
-            dataIndex: 'mainIncome'
+            dataIndex: 'pv'
           },
           {
-            title:'其他收入',
+            title:'orderNum',
             align:"center",
-            dataIndex: 'otherIncome'
+            dataIndex: 'orderNum'
+          },
+          {
+            title:'fakeOrderNum',
+            align:"center",
+            dataIndex: 'fakeOrderNum'
+          },
+          {
+            title:'percent',
+            align:"center",
+            dataIndex: 'percent'
           },
           {
             title: '操作',
             dataIndex: 'action',
             align:"center",
+            fixed:"right",
+            width:147,
             scopedSlots: { customRender: 'action' }
           }
         ],
         url: {
-          list: "/scdx/jeecgMonthlyGrowthAnalysis/list",
-          delete: "/scdx/jeecgMonthlyGrowthAnalysis/delete",
-          deleteBatch: "/scdx/jeecgMonthlyGrowthAnalysis/deleteBatch",
-          exportXlsUrl: "/scdx/jeecgMonthlyGrowthAnalysis/exportXls",
-          importExcelUrl: "scdx/jeecgMonthlyGrowthAnalysis/importExcel",
+          list: "/scyd/scydDayReportsChild/list",
+          delete: "/scyd/scydDayReportsChild/delete",
+          deleteBatch: "/scyd/scydDayReportsChild/deleteBatch",
+          exportXlsUrl: "/scyd/scydDayReportsChild/exportXls",
+          importExcelUrl: "scyd/scydDayReportsChild/importExcel",
         },
         dictOptions:{
         },
+        tableScroll:{x :6*147+50}
       }
     },
     computed: {

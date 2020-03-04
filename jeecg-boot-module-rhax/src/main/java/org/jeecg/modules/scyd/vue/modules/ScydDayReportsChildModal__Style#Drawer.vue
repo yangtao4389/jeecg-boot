@@ -10,17 +10,23 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item label="year" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="[ 'year', validatorRules.year]" placeholder="请输入year"></a-input>
+        <a-form-item label="date" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-date placeholder="请选择date" v-decorator="[ 'date', validatorRules.date]" :trigger-change="true" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="月份" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="[ 'month', validatorRules.month]" placeholder="请输入月份"></a-input>
+        <a-form-item label="uv" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'uv', validatorRules.uv]" placeholder="请输入uv" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="佣金/主营收入" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'mainIncome', validatorRules.mainIncome]" placeholder="请输入佣金/主营收入" style="width: 100%"/>
+        <a-form-item label="pv" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'pv', validatorRules.pv]" placeholder="请输入pv" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="其他收入" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'otherIncome', validatorRules.otherIncome]" placeholder="请输入其他收入" style="width: 100%"/>
+        <a-form-item label="orderNum" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'orderNum', validatorRules.orderNum]" placeholder="请输入orderNum" style="width: 100%"/>
+        </a-form-item>
+        <a-form-item label="fakeOrderNum" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'fakeOrderNum', validatorRules.fakeOrderNum]" placeholder="请输入fakeOrderNum" style="width: 100%"/>
+        </a-form-item>
+        <a-form-item label="percent" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'percent', validatorRules.percent]" placeholder="请输入percent" style="width: 100%"/>
         </a-form-item>
         
       </a-form>
@@ -35,10 +41,12 @@
   import { httpAction } from '@/api/manage'
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
+  import JDate from '@/components/jeecg/JDate'  
   
   export default {
-    name: "JeecgMonthlyGrowthAnalysisModal",
+    name: "ScydDayReportsChildModal",
     components: { 
+      JDate,
     },
     data () {
       return {
@@ -57,18 +65,23 @@
         },
         confirmLoading: false,
         validatorRules: {
-          year: {rules: [
+          date: {rules: [
+            {required: true, message: '请输入date!'},
           ]},
-          month: {rules: [
+          uv: {rules: [
           ]},
-          mainIncome: {rules: [
+          pv: {rules: [
           ]},
-          otherIncome: {rules: [
+          orderNum: {rules: [
+          ]},
+          fakeOrderNum: {rules: [
+          ]},
+          percent: {rules: [
           ]},
         },
         url: {
-          add: "/scdx/jeecgMonthlyGrowthAnalysis/add",
-          edit: "/scdx/jeecgMonthlyGrowthAnalysis/edit",
+          add: "/scyd/scydDayReportsChild/add",
+          edit: "/scyd/scydDayReportsChild/edit",
         }
       }
     },
@@ -83,7 +96,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'year','month','mainIncome','otherIncome'))
+          this.form.setFieldsValue(pick(this.model,'date','uv','pv','orderNum','fakeOrderNum','percent'))
         })
       },
       close () {
@@ -126,7 +139,7 @@
         this.close()
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'year','month','mainIncome','otherIncome'))
+        this.form.setFieldsValue(pick(row,'date','uv','pv','orderNum','fakeOrderNum','percent'))
       }
       
     }

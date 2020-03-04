@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Slf4j
@@ -36,6 +37,9 @@ public class JeecgApplication {
                 "External: \thttp://" + ip + ":" + port + path + "/\n\t" +
                 "swagger-ui: \t\thttp://" + ip + ":" + port + path + "/doc.html\n" +
                 "----------------------------------------------------------");
+
+//      JeecgApplication mapping = application.getBean(JeecgApplication.class);
+//        Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 
     }
 }

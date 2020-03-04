@@ -1,4 +1,4 @@
-package org.jeecg.modules.demo.scdx.controller;
+package org.jeecg.modules.scyd.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,15 +9,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.api.vo.Result;
-import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.demo.scdx.entity.JeecgMonthlyGrowthAnalysis;
-import org.jeecg.modules.demo.scdx.service.IJeecgMonthlyGrowthAnalysisService;
+import org.jeecg.modules.scyd.entity.ScydDayReportsChild;
+import org.jeecg.modules.scyd.service.IScydDayReportsChildService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -38,63 +34,62 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 
  /**
- * @Description: jeecg_monthly_growth_analysis
+ * @Description: scyd_day_reports_child
  * @Author: jeecg-boot
- * @Date:   2020-03-02
+ * @Date:   2020-03-04
  * @Version: V1.0
  */
-
 @RestController
-@RequestMapping("/scdx/jeecgMonthlyGrowthAnalysis")
+@RequestMapping("/scyd/scydDayReportsChild")
 @Slf4j
-@Api(tags = "四川电信")
-public class JeecgMonthlyGrowthAnalysisController extends JeecgController<JeecgMonthlyGrowthAnalysis, IJeecgMonthlyGrowthAnalysisService> {
+public class ScydDayReportsChildController extends JeecgController<ScydDayReportsChild, IScydDayReportsChildService> {
 	@Autowired
-	private IJeecgMonthlyGrowthAnalysisService jeecgMonthlyGrowthAnalysisService;
+	private IScydDayReportsChildService scydDayReportsChildService;
 	
 	/**
 	 * 分页列表查询
 	 *
-	 * @param jeecgMonthlyGrowthAnalysis
+	 * @param scydDayReportsChild
 	 * @param pageNo
 	 * @param pageSize
 	 * @param req
 	 * @return
 	 */
-	@AutoLog(value = "四川电信-列表")
-	@ApiOperation(value = "四川电信-分页列表查询", notes = "四川电信-分页列表查询")
 	@GetMapping(value = "/list")
-	public Result<?> queryPageList(JeecgMonthlyGrowthAnalysis jeecgMonthlyGrowthAnalysis,
+	public Result<?> queryPageList(ScydDayReportsChild scydDayReportsChild,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
-		QueryWrapper<JeecgMonthlyGrowthAnalysis> queryWrapper = QueryGenerator.initQueryWrapper(jeecgMonthlyGrowthAnalysis, req.getParameterMap());
-		Page<JeecgMonthlyGrowthAnalysis> page = new Page<JeecgMonthlyGrowthAnalysis>(pageNo, pageSize);
-		IPage<JeecgMonthlyGrowthAnalysis> pageList = jeecgMonthlyGrowthAnalysisService.page(page, queryWrapper);
+		QueryWrapper<ScydDayReportsChild> queryWrapper = QueryGenerator.initQueryWrapper(scydDayReportsChild, req.getParameterMap());
+
+		log.info(req.getParameterMap().toString());
+		log.info(queryWrapper.toString());
+		Page<ScydDayReportsChild> page = new Page<ScydDayReportsChild>(pageNo, pageSize);
+		IPage<ScydDayReportsChild> pageList = scydDayReportsChildService.page(page, queryWrapper);
 		return Result.ok(pageList);
 	}
 	
 	/**
 	 *   添加
 	 *
-	 * @param jeecgMonthlyGrowthAnalysis
+	 * @param scydDayReportsChild
 	 * @return
 	 */
 	@PostMapping(value = "/add")
-	public Result<?> add(@RequestBody JeecgMonthlyGrowthAnalysis jeecgMonthlyGrowthAnalysis) {
-		jeecgMonthlyGrowthAnalysisService.save(jeecgMonthlyGrowthAnalysis);
+	public Result<?> add(@RequestBody ScydDayReportsChild scydDayReportsChild) {
+		scydDayReportsChildService.save(scydDayReportsChild);
 		return Result.ok("添加成功！");
 	}
 	
 	/**
 	 *  编辑
 	 *
-	 * @param jeecgMonthlyGrowthAnalysis
+	 * @param scydDayReportsChild
 	 * @return
 	 */
 	@PutMapping(value = "/edit")
-	public Result<?> edit(@RequestBody JeecgMonthlyGrowthAnalysis jeecgMonthlyGrowthAnalysis) {
-		jeecgMonthlyGrowthAnalysisService.updateById(jeecgMonthlyGrowthAnalysis);
+	public Result<?> edit(@RequestBody ScydDayReportsChild scydDayReportsChild) {
+		scydDayReportsChildService.updateById(scydDayReportsChild);
 		return Result.ok("编辑成功!");
 	}
 	
@@ -106,7 +101,7 @@ public class JeecgMonthlyGrowthAnalysisController extends JeecgController<JeecgM
 	 */
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-		jeecgMonthlyGrowthAnalysisService.removeById(id);
+		scydDayReportsChildService.removeById(id);
 		return Result.ok("删除成功!");
 	}
 	
@@ -118,7 +113,7 @@ public class JeecgMonthlyGrowthAnalysisController extends JeecgController<JeecgM
 	 */
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		this.jeecgMonthlyGrowthAnalysisService.removeByIds(Arrays.asList(ids.split(",")));
+		this.scydDayReportsChildService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.ok("批量删除成功!");
 	}
 	
@@ -130,22 +125,22 @@ public class JeecgMonthlyGrowthAnalysisController extends JeecgController<JeecgM
 	 */
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
-		JeecgMonthlyGrowthAnalysis jeecgMonthlyGrowthAnalysis = jeecgMonthlyGrowthAnalysisService.getById(id);
-		if(jeecgMonthlyGrowthAnalysis==null) {
+		ScydDayReportsChild scydDayReportsChild = scydDayReportsChildService.getById(id);
+		if(scydDayReportsChild==null) {
 			return Result.error("未找到对应数据");
 		}
-		return Result.ok(jeecgMonthlyGrowthAnalysis);
+		return Result.ok(scydDayReportsChild);
 	}
 
     /**
     * 导出excel
     *
     * @param request
-    * @param jeecgMonthlyGrowthAnalysis
+    * @param scydDayReportsChild
     */
     @RequestMapping(value = "/exportXls")
-    public ModelAndView exportXls(HttpServletRequest request, JeecgMonthlyGrowthAnalysis jeecgMonthlyGrowthAnalysis) {
-        return super.exportXls(request, jeecgMonthlyGrowthAnalysis, JeecgMonthlyGrowthAnalysis.class, "jeecg_monthly_growth_analysis");
+    public ModelAndView exportXls(HttpServletRequest request, ScydDayReportsChild scydDayReportsChild) {
+        return super.exportXls(request, scydDayReportsChild, ScydDayReportsChild.class, "scyd_day_reports_child");
     }
 
     /**
@@ -157,7 +152,7 @@ public class JeecgMonthlyGrowthAnalysisController extends JeecgController<JeecgM
     */
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-        return super.importExcel(request, response, JeecgMonthlyGrowthAnalysis.class);
+        return super.importExcel(request, response, ScydDayReportsChild.class);
     }
 
 }
