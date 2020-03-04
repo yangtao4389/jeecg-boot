@@ -72,9 +72,10 @@ public class QueryGenerator {
 	public static <T> QueryWrapper<T> initQueryWrapper(T searchObj,Map<String, String[]> parameterMap){
 		long start = System.currentTimeMillis();
 		QueryWrapper<T> queryWrapper = new QueryWrapper<T>();
-		for(Map.Entry<String,String[]> entry:parameterMap.entrySet()){
-			log.info(entry.getKey() + " : " + entry.getValue());
-		}
+		parameterMap.entrySet().forEach(entry -> log.info("key:value = " + entry.getKey() + ":" + entry.getValue()));
+//		for(Map.Entry<String,String[]> entry:parameterMap.entrySet()){
+//			log.info(entry.getKey() + " : " + entry.getValue());
+//		}
 		installMplus(queryWrapper, searchObj, parameterMap);
 		log.info("---查询条件构造器初始化完成,耗时:"+(System.currentTimeMillis()-start)+"毫秒----");
 		log.info(queryWrapper.toString());
