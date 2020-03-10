@@ -58,7 +58,7 @@ public class ScydDayReportsVideoController extends JeecgController<ScydDayReport
 	 */
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(ScydDayReportsVideo scydDayReportsVideo,
-								   @RequestParam(name="pageNo", defaultValue="100") Integer pageNo,
+								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="1000") Integer pageSize,
 								   HttpServletRequest req) {
 		//todo 直接傳入req.getParameterMap()  肯定出问题。

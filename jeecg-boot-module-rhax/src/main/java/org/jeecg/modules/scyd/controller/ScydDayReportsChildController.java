@@ -67,7 +67,7 @@ public class ScydDayReportsChildController extends JeecgController<ScydDayReport
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(ScydDayReportsChild scydDayReportsChild,
 //								   @RequestParam(name="date")  java.util.Date date,
-								   @DateTimeFormat(pattern = "yyyy-MM-dd")Date date,
+//								   @DateTimeFormat(pattern = "yyyy-MM-dd")Date date,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
