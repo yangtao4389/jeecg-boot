@@ -40,17 +40,17 @@ public class ScydDayReportsVideo implements Serializable {
     private Integer pv;
 	/**订购量*/
 	@Excel(name = "订购量", width = 15)
-    private Integer ordernum;
+    private Integer orderNum;
 	/**转化率*/
 	@Excel(name = "转化率", width = 15)
     private BigDecimal percent;
 	/**地区ID*/
-	@Excel(name = "地区ID", width = 15)
-    private String carrierid;
-	/**地区名*/
-	@Excel(name = "地区名", width = 15)
-    private String carriername;
+//	@Excel(name = "地区ID", width = 15)
+//    private String carrierid;
+//	/**地区名*/
+//	@Excel(name = "地区名", width = 15)
+//    private String carriername;
 	/**自订购数据*/
 	@Excel(name = "自订购数据", width = 15)
-    private Integer fakeordernum;
+    private Integer fakeOrderNum;
 }

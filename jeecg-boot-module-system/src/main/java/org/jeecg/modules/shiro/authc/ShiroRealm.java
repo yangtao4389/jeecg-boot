@@ -86,12 +86,13 @@ public class ShiroRealm extends AuthorizingRealm {
      * 用户信息认证是在用户进行登录的时候进行验证(不存redis)
 	 * 也就是说验证用户输入的账号和密码是否正确，错误抛出异常
 	 *
-	 * @param auth 用户登录的账号密码信息
+	 * @param auth 用户登录的账号密码信息  来源于 JwtFilter
 	 * @return 返回封装了用户信息的 AuthenticationInfo 实例
      * @throws AuthenticationException
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
+
 		String token = (String) auth.getCredentials();
 
 		if (token == null) {

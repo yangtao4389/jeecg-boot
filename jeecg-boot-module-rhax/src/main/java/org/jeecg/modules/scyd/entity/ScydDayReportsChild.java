@@ -48,9 +48,9 @@ public class ScydDayReportsChild implements Serializable {
 	@Excel(name = "percent", width = 15)
     private java.math.BigDecimal percent;
 	/**carrierId*/
-	@Excel(name = "carrierId", width = 15)
-    private java.lang.String carrierId;
+//	@Excel(name = "carrierId", width = 15)
+//    private java.lang.String carrierId;
 	/**carrierName*/
-	@Excel(name = "carrierName", width = 15)
-    private java.lang.String carrierName;
+//	@Excel(name = "carrierName", width = 15)
+//    private java.lang.String carrierName;
 }

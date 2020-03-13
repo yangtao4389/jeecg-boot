@@ -483,6 +483,37 @@ org.jeecg.config.Swagger2Config
 sql查询  org.jeecg.common.system.query.QueryGenerator
 
 
+### 全局异常连接
+JeecgBootExceptionHandler
+@RestControllerAdvice给类，@ExceptionHandler给方法
+* 全局异常处理
+* 全局数据绑定
+* 全局数据预处理
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+### X-Access-Token 在哪里定义？还是是默认的？
+jeecg-boot\jeecg-boot-base-common\src\main\java\org\jeecg\common\util\TokenUtilsc.java  这个是无效的，没有被引用
+jeecg-boot\jeecg-boot-base-common\src\main\java\org\jeecg\common\util\RestDesformUtil.java  也没用 先注释
+来源于：
+jeecg-boot\jeecg-boot-module-system\src\main\java\org\jeecg\modules\shiro\authc\aop\JwtFilter.java
+这里做了相应注释
+
+
+### @Configuration 与 @Bean
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration给类注解，@Bean给方法，共同构成配置文件。
+
+### aop目录全部都是拦截器
+
+### 未解决
+* 验证token后，抛出了异常，但返回的是json数据，还有地址，这里不知道怎么去处理的。
+
+
+### 研究定时器怎么用
+
+
 
 
 ### 部署 

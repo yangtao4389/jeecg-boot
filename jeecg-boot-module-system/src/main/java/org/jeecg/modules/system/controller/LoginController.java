@@ -54,7 +54,9 @@ public class LoginController {
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel){
+	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel){  //todo 这里限制了请求 必须为post json数据格式  @RequestBody 表示接收JSON格式字符串参数。  但是并不强求所有数据满足SysLoginModel
+
+
 		Result<JSONObject> result = new Result<JSONObject>();
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();
@@ -76,7 +78,7 @@ public class LoginController {
 		//update-end-author:taoyan date:20190828 for:校验验证码
 		
 		//1. 校验用户是否有效
-		SysUser sysUser = sysUserService.getUserByName(username);
+		SysUser sysUser = sysUserService.getUserByName(username);  // username为null时，也返回数据为null
 		result = sysUserService.checkUserIsEffective(sysUser);
 		if(!result.isSuccess()) {
 			return result;
