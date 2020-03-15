@@ -14,6 +14,7 @@ import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.shiro.authc.aop.JwtFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -145,12 +146,19 @@ public class ShiroConfig {
 		return shiroFilterFactoryBean;
 	}
 
+	@Bean("myRealm")
+	public ShiroRealm shiroRealm(){
+		return new ShiroRealm();
+
+	}
+
 	@Bean("securityManager")
-	public DefaultWebSecurityManager securityManager() {
+	public DefaultWebSecurityManager securityManager(@Qualifier("myRealm")ShiroRealm myRealm) {
 		log.info("DefaultWebSecurityManager securityManager 执行");
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-		ShiroRealm newM = new ShiroRealm();
-		securityManager.setRealm(newM);  // 20200311这里重写，是为了防止报错
+//		ShiroRealm newM = new ShiroRealm();
+//		securityManager.setRealm(newM);  // 20200311这里重写，是为了防止报错
+		securityManager.setRealm(myRealm);
 
 		/*
 		 * 关闭shiro自带的session，详情见文档

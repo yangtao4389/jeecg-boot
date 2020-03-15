@@ -92,7 +92,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
-
+		log.info("===============Shiro身份验证开始============ [ user、password]==========");
 		String token = (String) auth.getCredentials();
 
 		if (token == null) {
@@ -112,6 +112,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	public LoginUser checkUserTokenIsEffect(String token) throws AuthenticationException {
 		// 解密获得username，用于和数据库进行对比
 		String username = JwtUtil.getUsername(token);
+		log.info("身份认证用户："+username);
 		if (username == null) {
 			throw new AuthenticationException("token非法无效!");
 		}
