@@ -5,7 +5,7 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="12" :sm="16">
-            <a-form-item label="date">
+            <a-form-item label="日期">
               <j-date placeholder="请选择开始日期" class="query-group-cust" v-model="queryParam.date_begin"></j-date>
               <span class="query-group-split-cust"></span>
               <j-date placeholder="请选择结束日期" class="query-group-cust" v-model="queryParam.date_end"></j-date>
@@ -134,7 +134,7 @@
             }
           },
           {
-            title:'date',
+            title:'日期',
             align:"center",
             dataIndex: 'date',
             customRender:function (text) {
@@ -152,17 +152,17 @@
             dataIndex: 'pv'
           },
           {
-            title:'orderNum',
+            title:'订购数量',
             align:"center",
             dataIndex: 'orderNum'
           },
           {
-            title:'fakeOrderNum',
+            title:'自订购数量',
             align:"center",
             dataIndex: 'fakeOrderNum'
           },
           {
-            title:'percent',
+            title:'转化率',
             align:"center",
             dataIndex: 'percent'
           },

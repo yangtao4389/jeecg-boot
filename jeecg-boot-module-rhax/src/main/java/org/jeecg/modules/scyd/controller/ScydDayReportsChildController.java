@@ -36,7 +36,7 @@ import com.alibaba.fastjson.JSON;
  /**
  * @Description: scyd_day_reports_child
  * @Author: jeecg-boot
- * @Date:   2020-03-04
+ * @Date:   2020-03-07
  * @Version: V1.0
  */
 @RestController
@@ -61,9 +61,6 @@ public class ScydDayReportsChildController extends JeecgController<ScydDayReport
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
 		QueryWrapper<ScydDayReportsChild> queryWrapper = QueryGenerator.initQueryWrapper(scydDayReportsChild, req.getParameterMap());
-
-		log.info(req.getParameterMap().toString());
-		log.info(queryWrapper.toString());
 		Page<ScydDayReportsChild> page = new Page<ScydDayReportsChild>(pageNo, pageSize);
 		IPage<ScydDayReportsChild> pageList = scydDayReportsChildService.page(page, queryWrapper);
 		return Result.ok(pageList);

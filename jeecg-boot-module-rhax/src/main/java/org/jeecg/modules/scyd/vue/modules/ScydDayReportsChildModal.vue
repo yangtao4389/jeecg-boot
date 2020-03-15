@@ -10,8 +10,8 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item label="date" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-date placeholder="请选择date" v-decorator="[ 'date', validatorRules.date]" :trigger-change="true" style="width: 100%"/>
+        <a-form-item label="日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-date placeholder="请选择日期" v-decorator="[ 'date', validatorRules.date]" :trigger-change="true" style="width: 100%"/>
         </a-form-item>
         <a-form-item label="uv" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input-number v-decorator="[ 'uv', validatorRules.uv]" placeholder="请输入uv" style="width: 100%"/>
@@ -19,14 +19,14 @@
         <a-form-item label="pv" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input-number v-decorator="[ 'pv', validatorRules.pv]" placeholder="请输入pv" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="orderNum" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'orderNum', validatorRules.orderNum]" placeholder="请输入orderNum" style="width: 100%"/>
+        <a-form-item label="订购数量" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'orderNum', validatorRules.orderNum]" placeholder="请输入订购数量" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="fakeOrderNum" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'fakeOrderNum', validatorRules.fakeOrderNum]" placeholder="请输入fakeOrderNum" style="width: 100%"/>
+        <a-form-item label="自订购数量" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'fakeOrderNum', validatorRules.fakeOrderNum]" placeholder="请输入自订购数量" style="width: 100%"/>
         </a-form-item>
-        <a-form-item label="percent" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'percent', validatorRules.percent]" placeholder="请输入percent" style="width: 100%"/>
+        <a-form-item label="转化率" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'percent', validatorRules.percent]" placeholder="请输入转化率" style="width: 100%"/>
         </a-form-item>
 
       </a-form>
@@ -64,7 +64,7 @@
         confirmLoading: false,
         validatorRules: {
           date: {rules: [
-            {required: true, message: '请输入date!'},
+            {required: true, message: '请输入日期!'},
           ]},
           uv: {rules: [
           ]},

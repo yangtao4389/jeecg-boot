@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: scyd_day_reports_child
  * @Author: jeecg-boot
- * @Date:   2020-03-04
+ * @Date:   2020-03-07
  * @Version: V1.0
  */
 public interface ScydDayReportsChildMapper extends BaseMapper<ScydDayReportsChild> {
