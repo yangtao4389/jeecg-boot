@@ -96,9 +96,13 @@ spring:
         connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
       datasource:
         master:
-          url: jdbc:mysql://211.149.180.119:13306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+#          url: jdbc:mysql://211.149.180.119:13306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+#          username: root
+#          password: TvNf@Z^3f1qbteKR
+
+          url: jdbc:mysql://112.18.251.47:13306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false
           username: root
-          password: TvNf@Z^3f1qbteKR
+          password: s!2pauDgWl4Eu@cH
           driver-class-name: com.mysql.jdbc.Driver
           # 多数据源配置
           #multi-datasource1:
@@ -144,8 +148,6 @@ jeecg :
   sms:
      accessKeyId: ??
      accessKeySecret: ??
-  shiro:
-     excludeUrls: /test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**
   #阿里云oss存储配置
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com

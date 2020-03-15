@@ -34,9 +34,9 @@ import java.util.Map;
 @Slf4j
 @Configuration
 public class ShiroConfig {
-
-	@Value("${jeecg.shiro.excludeUrls}")
-	private String excludeUrls;
+//	20200311 yt 去掉通过配置文件来过滤url的操作，全部放入该文档
+//	@Value("${jeecg.shiro.excludeUrls}")
+//	private String excludeUrls;
 
     @Value("${spring.redis.port}")
     private String port;
@@ -60,12 +60,12 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-		if(oConvertUtils.isNotEmpty(excludeUrls)){
-			String[] permissionUrl = excludeUrls.split(",");
-			for(String url : permissionUrl){
-				filterChainDefinitionMap.put(url,"anon");
-			}
-		}
+//		if(oConvertUtils.isNotEmpty(excludeUrls)){
+//			String[] permissionUrl = excludeUrls.split(",");
+//			for(String url : permissionUrl){
+//				filterChainDefinitionMap.put(url,"anon");
+//			}
+//		}
 		//大屏请求排除
 		filterChainDefinitionMap.put("/big/screen/**", "anon");
 		filterChainDefinitionMap.put("/bigscreen/**", "anon");
@@ -122,6 +122,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/test/jeecgDemo/redis/**", "anon"); //redis测试
 		filterChainDefinitionMap.put("/test/jeecgDemo/hello", "anon"); //todo 新增测试
 		filterChainDefinitionMap.put("/scdx/jeecgMonthlyGrowthAnalysis/list", "anon"); //todo 新增测试
+		filterChainDefinitionMap.put("/scyd/dayReports/**", "anon"); //todo 新增测试
+
+
 		//排除Online请求
 		filterChainDefinitionMap.put("/auto/cgform/**", "anon");
 		
@@ -143,9 +146,11 @@ public class ShiroConfig {
 	}
 
 	@Bean("securityManager")
-	public DefaultWebSecurityManager securityManager(ShiroRealm myRealm) {
+	public DefaultWebSecurityManager securityManager() {
+		log.info("DefaultWebSecurityManager securityManager 执行");
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-		securityManager.setRealm(myRealm);
+		ShiroRealm newM = new ShiroRealm();
+		securityManager.setRealm(newM);  // 20200311这里重写，是为了防止报错
 
 		/*
 		 * 关闭shiro自带的session，详情见文档

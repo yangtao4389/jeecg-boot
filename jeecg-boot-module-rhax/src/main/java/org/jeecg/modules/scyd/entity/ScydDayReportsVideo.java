@@ -14,14 +14,14 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecg.common.aspect.annotation.Dict;
 
 /**
- * @Description: scyd_day_reports_child
+ * @Description: scyd_day_reports_video
  * @Author: jeecg-boot
- * @Date:   2020-03-07
+ * @Date:   2020-03-09
  * @Version: V1.0
  */
 @Data
-@TableName("scyd_day_reports_child")
-public class ScydDayReportsChild implements Serializable {
+@TableName("scyd_day_reports_video")
+public class ScydDayReportsVideo implements Serializable {
     private static final long serialVersionUID = 1L;
     
 	/**id*/
@@ -38,27 +38,19 @@ public class ScydDayReportsChild implements Serializable {
 	/**pv*/
 	@Excel(name = "pv", width = 15)
     private Integer pv;
-	/**订购数量*/
-	@Excel(name = "订购数量", width = 15)
+	/**订购量*/
+	@Excel(name = "订购量", width = 15)
     private Integer orderNum;
-	/**自订购数量*/
-	@Excel(name = "自订购数量", width = 15)
-    private Integer fakeOrderNum;
 	/**转化率*/
 	@Excel(name = "转化率", width = 15)
     private BigDecimal percent;
 	/**地区ID*/
-	@Excel(name = "地区ID", width = 15)
-    private String carrierId;
-	/**地区名*/
-	@Excel(name = "地区名", width = 15)
-    private String carrierName;
-
-	/**carrierId*/
-//	@Excel(name = "carrierId", width = 15)
-//    private java.lang.String carrierId;
-	/**carrierName*/
-//	@Excel(name = "carrierName", width = 15)
-//    private java.lang.String carrierName;
-
+//	@Excel(name = "地区ID", width = 15)
+//    private String carrierid;
+//	/**地区名*/
+//	@Excel(name = "地区名", width = 15)
+//    private String carriername;
+	/**自订购数据*/
+	@Excel(name = "自订购数据", width = 15)
+    private Integer fakeOrderNum;
 }

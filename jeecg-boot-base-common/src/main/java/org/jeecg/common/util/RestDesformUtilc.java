@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author sunjianlei
  */
-public class RestDesformUtil {
+public class RestDesformUtilc {
 
     private static String domain = null;
     private static String path = null;

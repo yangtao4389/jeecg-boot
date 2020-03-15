@@ -4,6 +4,81 @@
 -- cas  
 -- demo  
     mock里面全部都是模拟数据，以api开头
+    "/api/user/info",
+    "/api/permission",
+    "/api/user",
+    "/api/service",
+    "/api/role",
+    "/api/permission/no-pager",
+    "/api/report/getMonthCountInfo",
+    "/api/report/getCntrNoCountInfo",
+    "/api/report/getCabinetCountInfo",
+    "/api/report/getYearCountInfo",
+    "/api/area",
+    "/api/asynTreeList",
+    "/api/json/{filename}",
+    "/api/queryDiskInfo",
+    "/api/list/search/projects",
+    "/api/workplace/activity",
+    "/api/workplace/teams",
+    "/api/workplace/radar",
+    "/api/task/process",
+    
+    "/big/screen/index1",
+    "/big/screen/html",
+    "/big/screen/index2",
+    "/test/jeecgDemo/add",
+    "/test/jeecgDemo/delete",
+    "/test/jeecgDemo/list",
+    "/test/jeecgDemo/redis/{id}",
+    "/test/jeecgDemo/mpList",
+    "/test/jeecgDemo/sqlList",
+    "/test/jeecgDemo/exportXls",
+    "/test/jeecgDemo/html",
+    "/test/jeecgDemo/importExcel",
+    "/test/jeecgDemo/edit",
+    "/test/jeecgDemo/deleteBatch",
+    "/test/jeecgDemo/queryById",
+    "/test/jeecgDemo/redisSet",
+    "/test/jeecgDemo/redisGet",
+    "/test/jeecgDemo/redisSetObj",
+    "/test/jeecgDemo/redisGetObj",
+    "/test/jeecgDemo/testOnlineAdd",
+    "/test/jeecgOrderMain/add",
+    "/test/jeecgOrderMain/delete",
+    "/test/jeecgOrderMain/queryOrderCustomerListByMainId",
+    "/test/jeecgOrderMain/queryOrderTicketListByMainId",
+    "/test/jeecgOrderMain/exportXls",
+    "/test/jeecgOrderMain/importExcel",
+    "/test/jeecgOrderMain/deleteBatch",
+    "/test/jeecgOrderMain/queryById",
+    "/test/jeecgOrderMain/edit",
+    "/test/jeecgOrderMain/list",
+    "/test/order/add",
+    "/test/order/delete",
+    "/test/order/listOrderCustomerByMainId",
+    "/test/order/listOrderTicketByMainId",
+    "/test/order/orderList",
+    "/test/order/deleteBatchCustomer",
+    "/test/order/deleteBatchTicket",
+    "/test/order/edit",
+    "/test/order/deleteBatch",
+    "/test/order/queryById",
+    "/test/order/editCustomer",
+    "/test/order/addTicket",
+    "/test/order/deleteCustomer",
+    "/test/order/addCustomer",
+    "/test/order/editTicket",
+    "/test/order/deleteTicket",
+    "/test/joaDemo/add",
+    "/test/joaDemo/delete",
+    "/test/joaDemo/exportXls",
+    "/test/joaDemo/importExcel",
+    "/test/joaDemo/edit",
+    "/test/joaDemo/deleteBatch",
+    "/test/joaDemo/queryById",
+    "/test/joaDemo/list",
+    "/test/jeecgDemo/hello",
 -- message  
     "/message/sysMessage/add",
     "/message/sysMessage/delete",
@@ -406,6 +481,37 @@ org.jeecg.config.Swagger2Config
 
 ### 构造器处理
 sql查询  org.jeecg.common.system.query.QueryGenerator
+
+
+### 全局异常连接
+JeecgBootExceptionHandler
+@RestControllerAdvice给类，@ExceptionHandler给方法
+* 全局异常处理
+* 全局数据绑定
+* 全局数据预处理
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+### X-Access-Token 在哪里定义？还是是默认的？
+jeecg-boot\jeecg-boot-base-common\src\main\java\org\jeecg\common\util\TokenUtilsc.java  这个是无效的，没有被引用
+jeecg-boot\jeecg-boot-base-common\src\main\java\org\jeecg\common\util\RestDesformUtil.java  也没用 先注释
+来源于：
+jeecg-boot\jeecg-boot-module-system\src\main\java\org\jeecg\modules\shiro\authc\aop\JwtFilter.java
+这里做了相应注释
+
+
+### @Configuration 与 @Bean
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration给类注解，@Bean给方法，共同构成配置文件。
+
+### aop目录全部都是拦截器
+
+### 未解决
+* 验证token后，抛出了异常，但返回的是json数据，还有地址，这里不知道怎么去处理的。
+
+
+### 研究定时器怎么用
 
 
 

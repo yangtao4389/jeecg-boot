@@ -30,7 +30,7 @@ public class JeecgBootExceptionHandler {
 	 */
 	@ExceptionHandler(JeecgBootException.class)
 	public Result<?> handleRRException(JeecgBootException e){
-		log.error(e.getMessage(), e);
+//		log.error(e.getMessage(), e);
 		return Result.error(e.getMessage());
 	}
 

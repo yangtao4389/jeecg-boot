@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description: 编程校验token有效性
  */
 @Slf4j
-public class TokenUtils {
+public class TokenUtilsc {
 
     /**
      * 获取 request 里传递的 token
