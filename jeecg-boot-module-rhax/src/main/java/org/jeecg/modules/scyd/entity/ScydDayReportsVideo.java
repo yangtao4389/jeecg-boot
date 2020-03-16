@@ -25,7 +25,7 @@ public class ScydDayReportsVideo implements Serializable {
     private static final long serialVersionUID = 1L;
     
 	/**id*/
-	@TableId(type = IdType.ID_WORKER_STR)
+	@TableId(type = IdType.AUTO)
     private Integer id;
 	/**日期*/
 	@Excel(name = "日期", width = 15, format = "yyyy-MM-dd")

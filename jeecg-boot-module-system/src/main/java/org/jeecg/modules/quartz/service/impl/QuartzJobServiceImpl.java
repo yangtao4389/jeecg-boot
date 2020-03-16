@@ -48,6 +48,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 	 */
 	@Override
 	public boolean saveAndScheduleJob(QuartzJob quartzJob) {
+
 		if (CommonConstant.STATUS_NORMAL.equals(quartzJob.getStatus())) {
 			// 定时器添加
 			this.schedulerAdd(quartzJob.getJobClassName().trim(), quartzJob.getCronExpression().trim(), quartzJob.getParameter());
@@ -115,6 +116,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobClassName).withSchedule(scheduleBuilder).build();
 
 			scheduler.scheduleJob(jobDetail, trigger);
+			log.info("创建定时任务成功:"+jobClassName+"--"+cronExpression+"--"+parameter);
 		} catch (SchedulerException e) {
 			throw new JeecgBootException("创建定时任务失败", e);
 		} catch (RuntimeException e) {

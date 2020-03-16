@@ -85,6 +85,11 @@ public class QuartzJobController {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Result<?> add(@RequestBody QuartzJob quartzJob) {
+		// 验证数据
+		if(quartzJob.getJobClassName() == null || quartzJob.getCronExpression() == null){
+			log.info("quartzJob 数据未完全 填入");
+			return Result.error("quartzJob 数据未完全 填入");
+		}
 		List<QuartzJob> list = quartzJobService.findByJobClassName(quartzJob.getJobClassName());
 		if (list != null && list.size() > 0) {
 			return Result.error("该定时任务类名已存在");
@@ -101,6 +106,10 @@ public class QuartzJobController {
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public Result<?> eidt(@RequestBody QuartzJob quartzJob) {
+//		if(quartzJob.getJobClassName() == null || quartzJob.getCronExpression() == null){
+//			log.info("quartzJob 数据未完全 填入");
+//			return Result.error("quartzJob 数据未完全 填入");
+//		}
 		try {
 			quartzJobService.editAndScheduleJob(quartzJob);
 		} catch (SchedulerException e) {

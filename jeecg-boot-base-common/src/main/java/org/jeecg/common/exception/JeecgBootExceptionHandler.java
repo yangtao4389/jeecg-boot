@@ -57,7 +57,7 @@ public class JeecgBootExceptionHandler {
 		log.error(e.getMessage(), e);
 		return Result.error("操作失败，"+e.getMessage());
 	}
-	
+
 	/**
 	 * @Author 政辉
 	 * @param e
@@ -81,9 +81,9 @@ public class JeecgBootExceptionHandler {
 		//return Result.error("没有权限，请联系管理员授权");
 		return Result.error(405,sb.toString());
 	}
-	
-	 /** 
-	  * spring默认上传大小100MB 超出大小捕获异常MaxUploadSizeExceededException 
+
+	 /**
+	  * spring默认上传大小100MB 超出大小捕获异常MaxUploadSizeExceededException
 	  */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public Result<?> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
