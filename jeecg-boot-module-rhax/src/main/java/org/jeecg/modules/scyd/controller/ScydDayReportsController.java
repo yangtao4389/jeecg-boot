@@ -9,10 +9,7 @@ import org.jeecg.modules.scyd.entity.ScydDayReportsVideo;
 import org.jeecg.modules.scyd.service.IScydDayReportsChildService;
 import org.jeecg.modules.scyd.service.IScydDayReportsVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.jeecg.common.constant.HallConstant;
 
@@ -59,6 +56,35 @@ public class ScydDayReportsController {
         }else {
             return Result.error("no productType");
         }
+
+    }
+
+
+    @PostMapping(value = "/saveTest")
+    public Result<?> saveTest(@RequestBody ScydDayReportsVideo scydDayReportsVideo){  // 这个才能获取数据@RequestBody
+        // 查看是否有当天数据存在
+        // 如果没有，则save
+        // 如果有，则更新
+
+        LambdaQueryWrapper<ScydDayReportsVideo> query = new LambdaQueryWrapper<ScydDayReportsVideo>();
+        query.eq(ScydDayReportsVideo::getDate,scydDayReportsVideo.getDate());
+        List<ScydDayReportsVideo> list =  scydDayReportsVideoService.list(query);
+        if (list.size()>0){
+            scydDayReportsVideoService.update(scydDayReportsVideo,query);
+        }else {
+            scydDayReportsVideoService.save(scydDayReportsVideo);
+        }
+
+        return Result.ok("save ok");
+    }
+
+    @PostMapping(value = "/multiType")
+    public Result<?> multiType(){
+        // 使用同一个entity来实现 可以抽象一个父类，然后不同的表去继承该类  暂时不用。
+        // JdbcTemplete 原生写法，增删改查时 表名传进去。自己封装一下，用起来也不错 看一下mybatis-plus有这样的功能没
+        // 动态表名。
+        return Result.ok("save ok");
+
 
     }
 

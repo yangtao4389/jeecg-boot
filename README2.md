@@ -515,6 +515,38 @@ import org.springframework.context.annotation.Configuration;
 
 
 
+### mybatis中的save update 是怎么实现的？？ 数据的unique怎么处理
+unique通过mysql本身的unique来处理
+saveUpdate无效，根本用不了
+
+### actuator监控 url监控等
+ <!--  监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+配置：
+```yaml
+# 监控
+management:
+# 暴露所有接口出来  如果不开启，默认只有/actuator/info  /actuator/health
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+```
+
+
+
+### 研究websocket
+
+### 使用多张表来统计数据
+主要是备份的作用
+
+
+
+
 
 ### 部署 
 * 使用docker  
